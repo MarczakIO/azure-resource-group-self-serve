@@ -18,7 +18,15 @@ namespace web
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost
+                .CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory());
+                    config.AddJsonFile(
+                        "appsettings.development.json", optional: true, reloadOnChange: false);
+                    config.AddCommandLine(args);
+                })
                 .UseStartup<Startup>();
     }
 }
