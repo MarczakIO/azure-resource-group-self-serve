@@ -26,4 +26,4 @@ bin/
 *.rar
 *.tar
 *.zip
-web/appsettings.Development.json
+*appsettings.Development.json
