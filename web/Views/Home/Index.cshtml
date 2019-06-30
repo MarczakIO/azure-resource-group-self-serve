@@ -1,8 +1,16 @@
-﻿@{
+﻿@model HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    @Html.DisplayNameFor(model => model.ResourceGroupName)
+    <form asp-controller="Home" asp-action="Create" method="post">
+    ResourceGroupName:  <input asp-for="ResourceGroupName" /> <br />
+    <button type="submit">Register</button>
+
+    <p>@ViewBag.rgUrl</p>
+</form>
 </div>
