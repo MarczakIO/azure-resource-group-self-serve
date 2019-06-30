@@ -37,7 +37,7 @@ namespace webapp
 
             services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
                 .AddAzureAD(options => Configuration.Bind("AzureAd", options));
-
+            services.AddApplicationInsightsTelemetry();
             services.AddHttpClient();
             services.AddMvc(options =>
             {
