@@ -63,3 +63,13 @@ body {
 .btn-primary:hover {
   background-color:white !important;
   color:#783cbe !important;
+}
+.btn-secondary {
+  background-color: white !important;
+  border: 2px solid #783cbe !important;
+  color: #783cbe !important;
+}
+.btn-secondary:hover {
+  background-color:#d2c7df !important;
+  color:#5a2a92 !important;
+}

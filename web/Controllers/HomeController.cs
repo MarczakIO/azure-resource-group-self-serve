@@ -53,6 +53,8 @@ namespace webapp.Controllers
             var oid =  User.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
             var resourceGroupName = $"{prefix}_{upn}_{model.ResourceGroupName}";
+            ViewBag.resourceGroupName = resourceGroupName;
+
             var rgUrl = $"https://management.azure.com/subscriptions/{subscriptionId}" + 
                 $"/resourcegroups/{resourceGroupName}?api-version=2019-05-01";
 
@@ -86,7 +88,7 @@ namespace webapp.Controllers
             // ViewBag
             ViewBag.ResourceGroupUrl = $"https://portal.azure.com/#@{domain}/resource/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/overview";
 
-            return View("Index");
+            return View();
         }
 
         public IActionResult Privacy()
