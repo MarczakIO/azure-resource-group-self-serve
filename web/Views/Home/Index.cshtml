@@ -1,16 +1,74 @@
 ﻿@model HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
+    var user = User.Identity.Name;
+    var upn = user.Split('@')[0].Replace(".","");
 }
 
-<div class="text-center">
+<div class="text-container">
     <h1 class="display-4">Welcome</h1>
     
-    @Html.DisplayNameFor(model => model.ResourceGroupName)
     <form asp-controller="Home" asp-action="Create" method="post">
-    ResourceGroupName:  <input asp-for="ResourceGroupName" /> <br />
-    <button type="submit">Register</button>
 
-    <p>@ViewBag.rgUrl</p>
-</form>
+        <div class="form-group">
+            <label for="ResourceGroupName">Resource Group Name</label>
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="validationTooltipUsernamePrepend">Bootcamp_@(upn)_</span>
+                </div>
+                <input type="ResourceGroupName" class="form-control" asp-for="ResourceGroupName"/>
+            </div>
+            
+            <small id="emailHelp" class="form-text text-muted">Name of the resource group created in Azure.</small>
+        </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <hr/>
+    </form>
+
+    @if (ViewBag.ResourceGroupRequest == System.Net.HttpStatusCode.OK) {
+
+        <h3 class="display-8">Resource Group Updated</h3>
+    
+    } else if (ViewBag.ResourceGroupRequest == System.Net.HttpStatusCode.Created) {
+
+        <h3 class="display-8">Resource Group Created</h3>
+    
+    } else {
+
+        <h3 class="display-8">Requested Failed Status @ViewBag.ResourceGroupRequest</h3>
+
+    }
+
+    @if (ViewBag.ResourceGroupRequest != null) {
+    
+        <div class="form-group">
+            <label for="">Request Status</label>
+            <input type="" readonly="readonly" class="form-control" value="@ViewBag.ResourceGroupRequest"/>
+        </div>
+
+        <div class="form-group">
+            <label for="">Assignment Status</label>
+            <input type="" readonly="readonly" class="form-control" value="@ViewBag.AssignmentRequest"/>
+            <small id="emailHelp" class="form-text text-muted">Conflict Status means the assignment was already present on the resource group.</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="">User Name</label>
+            <input type="" readonly="readonly" class="form-control" value="@ViewBag.UPN"/>
+        </div>
+
+        <div class="form-group">
+            <label for="">Subscription Id</label>
+            <input type="" readonly="readonly" class="form-control" value="@ViewBag.subscriptionId"/>
+        </div>
+
+        <div class="form-group">
+            <label for="">Role Id</label>
+            <input type="" readonly="readonly" class="form-control" value="@ViewBag.roleId"/>
+        </div>
+    }
+
+    <a target="_blank" href="@ViewBag.ResourceGroupUrl" type="button" class="btn btn-primary">View in Azure</a>
+
 </div>

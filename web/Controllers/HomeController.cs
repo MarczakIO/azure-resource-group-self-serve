@@ -41,10 +41,17 @@ namespace webapp.Controllers
             var domain = _configuration["Subscription:Domain"];
             var roleId = _configuration["Subscription:RoleId"];
 
+            var user = User.Identity.Name;
+            var upn = user.Split('@')[0].Replace(".","");
+            // ViewBag
+            ViewBag.UPN = upn;
+            ViewBag.subscriptionId = subscriptionId;
+            ViewBag.domain = domain;
+            ViewBag.roleId = roleId;
+            
             var oid =  User.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-            var name =  User.FindFirst("name").Value;
 
-            var resourceGroupName = $"Bootcamp_{model.ResourceGroupName}";
+            var resourceGroupName = $"Bootcamp_{upn}_{model.ResourceGroupName}";
             var rgUrl = $"https://management.azure.com/subscriptions/{subscriptionId}" + 
                 $"/resourcegroups/{resourceGroupName}?api-version=2019-05-01";
 
@@ -53,6 +60,8 @@ namespace webapp.Controllers
             request.Headers.Add("Authorization", $"Bearer {apiToken}");
             request.Content = new System.Net.Http.StringContent("{location:'eastus'}", Encoding.UTF8, "application/json");
             var response = await client.SendAsync(request);
+
+            ViewBag.ResourceGroupRequest = response.StatusCode;
 
             var guid = Guid.NewGuid().ToString();
             var rbacUrl = "https://management.azure.com/subscriptions/" + 
@@ -71,7 +80,10 @@ namespace webapp.Controllers
 
             response = await client.SendAsync(request);
 
-            ViewBag.rgUrl = $"https://portal.azure.com/#@{domain}/resource/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/overview";
+            ViewBag.AssignmentRequest = response.StatusCode;
+
+            // ViewBag
+            ViewBag.ResourceGroupUrl = $"https://portal.azure.com/#@{domain}/resource/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/overview";
 
             return View("Index");
         }
