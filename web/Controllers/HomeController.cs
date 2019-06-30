@@ -40,6 +40,7 @@ namespace webapp.Controllers
             var subscriptionId = _configuration["Subscription:Id"];
             var domain = _configuration["Subscription:Domain"];
             var roleId = _configuration["Subscription:RoleId"];
+            var prefix = _configuration["Subscription:ResourceGroupPrefix"];
 
             var user = User.Identity.Name;
             var upn = user.Split('@')[0].Replace(".","");
@@ -51,7 +52,7 @@ namespace webapp.Controllers
             
             var oid =  User.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
-            var resourceGroupName = $"Bootcamp_{upn}_{model.ResourceGroupName}";
+            var resourceGroupName = $"{prefix}_{upn}_{model.ResourceGroupName}";
             var rgUrl = $"https://management.azure.com/subscriptions/{subscriptionId}" + 
                 $"/resourcegroups/{resourceGroupName}?api-version=2019-05-01";
 

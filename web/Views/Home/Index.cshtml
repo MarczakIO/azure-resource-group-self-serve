@@ -14,7 +14,7 @@
             <label for="ResourceGroupName">Resource Group Name</label>
             <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="validationTooltipUsernamePrepend">Bootcamp_@(upn)_</span>
+                <span class="input-group-text" id="validationTooltipUsernamePrepend">@Configuration["Subscription:ResourceGroupPrefix"]_@(upn)_</span>
                 </div>
                 <input type="ResourceGroupName" class="form-control" asp-for="ResourceGroupName"/>
             </div>
@@ -26,22 +26,22 @@
     <hr/>
     </form>
 
-    @if (ViewBag.ResourceGroupRequest == System.Net.HttpStatusCode.OK) {
-
-        <h3 class="display-8">Resource Group Updated</h3>
-    
-    } else if (ViewBag.ResourceGroupRequest == System.Net.HttpStatusCode.Created) {
-
-        <h3 class="display-8">Resource Group Created</h3>
-    
-    } else {
-
-        <h3 class="display-8">Requested Failed Status @ViewBag.ResourceGroupRequest</h3>
-
-    }
-
     @if (ViewBag.ResourceGroupRequest != null) {
     
+        @if (ViewBag.ResourceGroupRequest == System.Net.HttpStatusCode.OK) {
+
+            <h3 class="display-8">Resource Group Updated</h3>
+        
+        } else if (ViewBag.ResourceGroupRequest == System.Net.HttpStatusCode.Created) {
+
+            <h3 class="display-8">Resource Group Created</h3>
+        
+        } else {
+
+            <h3 class="display-8">Requested Failed Status @ViewBag.ResourceGroupRequest</h3>
+
+        }
+
         <div class="form-group">
             <label for="">Request Status</label>
             <input type="" readonly="readonly" class="form-control" value="@ViewBag.ResourceGroupRequest"/>
@@ -67,8 +67,10 @@
             <label for="">Role Id</label>
             <input type="" readonly="readonly" class="form-control" value="@ViewBag.roleId"/>
         </div>
+
+         <a target="_blank" href="@ViewBag.ResourceGroupUrl" type="button" class="btn btn-primary">View in Azure</a>
     }
 
-    <a target="_blank" href="@ViewBag.ResourceGroupUrl" type="button" class="btn btn-primary">View in Azure</a>
+   
 
 </div>
