@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\netcoreapp2.2\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/96a9015f-646c-4fbd-86e8-00f28831e018/resourceGroups/upskilling-self-serve-portal/providers/Microsoft.Web/sites/lingaro-upskilling"
+}

@@ -14,7 +14,7 @@
             <label for="ResourceGroupName">Resource Group Name</label>
             <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="validationTooltipUsernamePrepend">@Configuration["Subscription:ResourceGroupPrefix"]_@(upn)_</span>
+                <span class="input-group-text" id="validationTooltipUsernamePrepend">@Configuration["Subscription:ResourceGroupPrefix"]@Configuration["Separator"]@(upn)@Configuration["Separator"]</span>
                 </div>
                 <input type="ResourceGroupName" class="form-control" asp-for="ResourceGroupName"/>
             </div>

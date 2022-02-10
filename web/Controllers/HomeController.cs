@@ -41,6 +41,7 @@ namespace webapp.Controllers
             var domain = _configuration["Subscription:Domain"];
             var roleId = _configuration["Subscription:RoleId"];
             var prefix = _configuration["Subscription:ResourceGroupPrefix"];
+            var separator = _configuration["Separator"];
 
             var user = User.Identity.Name;
             var upn = user.Split('@')[0].Replace(".","");
@@ -52,7 +53,7 @@ namespace webapp.Controllers
             
             var oid =  User.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
-            var resourceGroupName = $"{prefix}_{upn}_{model.ResourceGroupName}";
+            var resourceGroupName = $"{prefix}{separator}{upn}{separator}{model.ResourceGroupName}";
             ViewBag.resourceGroupName = resourceGroupName;
 
             var rgUrl = $"https://management.azure.com/subscriptions/{subscriptionId}" + 
@@ -61,7 +62,7 @@ namespace webapp.Controllers
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Put, rgUrl);
             request.Headers.Add("Authorization", $"Bearer {apiToken}");
-            request.Content = new System.Net.Http.StringContent("{location:'eastus'}", Encoding.UTF8, "application/json");
+            request.Content = new System.Net.Http.StringContent("{location:'westeurope'}", Encoding.UTF8, "application/json");
             var response = await client.SendAsync(request);
 
             ViewBag.ResourceGroupRequest = response.StatusCode;
@@ -84,6 +85,7 @@ namespace webapp.Controllers
             response = await client.SendAsync(request);
 
             ViewBag.AssignmentRequest = response.StatusCode;
+            ViewBag.OID = oid;
 
             // ViewBag
             ViewBag.ResourceGroupUrl = $"https://portal.azure.com/#@{domain}/resource/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/overview";
