@@ -1,0 +1,47 @@
+[
+  {
+    "name": "AzureAd:ClientId",
+    "value": "b3e63d17-5499-4dee-80fe-cb4fa214ad3e",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:Domain",
+    "value": "demodomain.onmicrosoft.com",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:Instance",
+    "value": "https://login.microsoftonline.com/",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:TenantId",
+    "value": "7a72f157-3f31-4402-8a3a-3aa9322ade23",
+    "slotSetting": false
+  },
+  {
+    "name": "Separator",
+    "value": "-",
+    "slotSetting": false
+  },
+  {
+    "name": "Subscription:Domain",
+    "value": "demo.onmicrosoft.com",
+    "slotSetting": false
+  },
+  {
+    "name": "Subscription:Id",
+    "value": "96a9015f-646c-4f2d-86e8-00f28831e018",
+    "slotSetting": false
+  },
+  {
+    "name": "Subscription:ResourceGroupPrefix",
+    "value": "rg",
+    "slotSetting": false
+  },
+  {
+    "name": "Subscription:RoleId",
+    "value": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "slotSetting": false
+  }
+]
